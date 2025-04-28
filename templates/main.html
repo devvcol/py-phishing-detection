@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Email Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Phishing Email Detector</h2>
+        <form method="POST">
+            <textarea name="email_text" placeholder="Paste your suspicious email here to analyze..." required></textarea>
+            <button type="submit">Analyze Email</button>
+        </form>
+        
+        {% if result is not none %}
+            <div class="result {% if result == 'Safe' %}safe-result{% else %}phishing-result{% endif %}">
+                <div class="result-title {{ 'safe' if result == 'Safe' else 'phishing' }}">
+                    {{ result }}
+                </div>
+                <div class="probability">
+                    Phishing Probability: {{ probability|int }}%
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>
